@@ -1,0 +1,151 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SubmissionAccess {
+  EVERYONE
+  AUTHENTICATED
+}
+
+model User {
+  id              String           @id @default(cuid())
+  name            String
+  email           String
+  emailVerified   Boolean
+  image           String?
+  createdAt       DateTime
+  updatedAt       DateTime
+  sessions        Session[]
+  accounts        Account[]
+  forms           Form[]
+  formSubmissions FormSubmission[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}
+
+model Form {
+  id        String   @id @default(cuid())
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+
+  title       String
+  description String @default("")
+  content     String @default("[]")
+
+  visitsCount      Int @default(0)
+  submissionsCount Int @default(0)
+
+  shareURL String @unique @default(uuid())
+
+  submissionAccess SubmissionAccess @default(EVERYONE)
+  isTrashed        Boolean          @default(false)
+  trashedAt        DateTime?
+
+  formSubmissions FormSubmission[]
+  user            User             @relation(fields: [userId], references: [id])
+
+  dailyStats FormDailyStats[]
+
+  @@map("forms")
+}
+
+model FormSubmission {
+  id          String   @id @default(cuid())
+  formId      String
+  submittedAt DateTime @default(now())
+  form        Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+
+  content String // Captured form data in JSON
+
+  city      String?
+  country   String?
+  continent String?
+  device    String?
+
+  @@unique([formId, userId])
+  @@map("form_submissions")
+}
+
+model FormDailyStats {
+  id                 String   @id @default(uuid())
+  formId             String
+  date               DateTime
+  visitsCount        Int      @default(0)
+  submissions        Int      @default(0)
+  responsePercentage Float?
+  bounceRate         Float?
+
+  // aggregated location stats
+  cities     Json?
+  countries  Json?
+  continents Json?
+
+  // aggregated device stats
+  devices Json?
+
+  form Form @relation(fields: [formId], references: [id], onDelete: Cascade)
+
+  @@unique([formId, date])
+  @@map("form_daily_stats")
+}
