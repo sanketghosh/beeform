@@ -29,3 +29,4 @@ export type StatsCardsType = {
 };
 
 export type SortOrderType = "latest" | "oldest";
+export type SortStatusType = "all" | "published" | "unpublished";

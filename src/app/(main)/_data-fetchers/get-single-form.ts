@@ -1,20 +1,22 @@
-import { SortOrderType } from "@/types";
 import { getSessionData } from "@/utils/get-session";
 import { prisma } from "@/lib/prisma";
 
-export const getAllForms = async (sort: SortOrderType) => {
+export const getSingleForm = async (formId: string) => {
   const { authenticatedUserId } = await getSessionData();
 
   if (!authenticatedUserId) {
-    throw new Response("User not authenticated.");
+    throw new Error("User is not authenticated.");
   }
 
-  const forms = await prisma.form.findMany({
+  const form = await prisma.form.findFirst({
     where: {
+      id: formId,
       userId: authenticatedUserId,
     },
     select: {
       id: true,
+      user: true,
+      userId: true,
       title: true,
       description: true,
       published: true,
@@ -22,22 +24,17 @@ export const getAllForms = async (sort: SortOrderType) => {
       updatedAt: true,
       visitsCount: true,
       submissionsCount: true,
-      isTrashed: true,
       content: true,
-      dailyStats: true,
-      formSubmissions: true,
       shareURL: true,
+      dailyStats: true,
+      isTrashed: true,
       submissionAccess: true,
       trashedAt: true,
-      user: true,
-      userId: true,
-    },
-    orderBy: {
-      createdAt: sort === "latest" ? "desc" : "asc",
+      formSubmissions: true,
     },
   });
 
   return {
-    forms,
+    form,
   };
 };

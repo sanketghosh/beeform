@@ -13,6 +13,13 @@ export default {
         instrumentSans: ["Instrument Sans", "serif"],
         instrumentSerif: ["Instrument Serif", "serif"],
       },
+      backgroundImage: {
+        chequered:
+          "linear-gradient(hsl(var(--secondary)) 1.1px, transparent 1.1px), linear-gradient(to right, hsl(var(--secondary)) 1.1px, hsl(var(--background)) 1.1px)",
+      },
+      backgroundSize: {
+        chequered: "22px 22px",
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
