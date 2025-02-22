@@ -1,3 +1,5 @@
+"use client";
+
 // packages
 import { v4 as uuidGenerator } from "uuid";
 

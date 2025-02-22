@@ -1,4 +1,4 @@
-import { Form } from "@prisma/client";
+/* import { Form } from "@prisma/client";
 import { atom, useAtom } from "jotai";
 import { useMemo } from "react";
 
@@ -25,4 +25,31 @@ export const useSingleFormData = () => {
     formData,
     setFormData,
   };
-};
+}; */
+
+import { Form } from "@prisma/client";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+
+interface FormStoreType {
+  formData: Form | null;
+  setFormData: (data: Form) => void;
+}
+
+export const useSingleFormData = create<FormStoreType>()(
+  persist(
+    (set) => ({
+      formData: null,
+      setFormData: (formData: Form) => {
+        console.log("Setting Form Data:", formData);
+        set({ formData });
+      },
+    }),
+    {
+      name: "single-form-data-store", // Key to save in localStorage
+      partialize: (state) => ({
+        formData: state.formData,
+      }), // Optional: Save only selected fields
+    },
+  ),
+);

@@ -7,14 +7,14 @@ type CreateFormProps = {
   };
 };
 
-export default async function CreateForm({
-  params: { slug },
-}: CreateFormProps) {
-  console.log(slug);
+export default async function CreateForm({ params }: CreateFormProps) {
+  const { slug } = await params;
+
+  console.log("@@@DEBUGGING ->> SLUG OF **/create-form/[slug]** :::", slug);
 
   const { form } = await getSingleForm(slug);
 
-  console.log(form);
+  // console.log(form);
 
   return (
     <div className="h-full">

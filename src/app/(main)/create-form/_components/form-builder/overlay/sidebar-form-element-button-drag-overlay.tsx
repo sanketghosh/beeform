@@ -1,3 +1,5 @@
+"use client";
+
 // packages
 import { useDraggable } from "@dnd-kit/core";
 
@@ -28,7 +30,7 @@ export default function SidebarFormElementButton({
   return (
     <Button
       className={cn(
-        "flex h-20 w-full flex-col",
+        "flex h-24 w-full flex-col",
         draggable.isDragging && "ring-2 ring-primary",
       )}
       variant={"outline"}
@@ -36,7 +38,7 @@ export default function SidebarFormElementButton({
       {...draggable.listeners}
       {...draggable.attributes}
     >
-      <Icon className="h-6 w-6" />
+      <Icon className="h-10 w-10" />
       <p className="text-xs">{label}</p>
     </Button>
   );

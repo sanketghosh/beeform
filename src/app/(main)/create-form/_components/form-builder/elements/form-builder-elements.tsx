@@ -1,3 +1,5 @@
+"use client";
+
 // components
 // layout elements
 import { TitleFieldFormElement } from "@/app/(main)/create-form/_components/form-builder/elements/layout-elements/title-field";

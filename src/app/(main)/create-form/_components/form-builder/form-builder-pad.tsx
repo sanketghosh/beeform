@@ -6,15 +6,33 @@ import { useFormBuilderContext } from "../../_hooks/use-form-builder-context";
 import { ElementsType } from "../../_types";
 import { FormElements } from "./elements/form-builder-elements";
 import { v4 as uuidGenerator } from "uuid";
+import { GripIcon } from "lucide-react";
+import FormElementWrapper from "./form-element-wrapper";
+import { useEffect } from "react";
+import { Form } from "@prisma/client";
 
-export default function FormBuilderPad() {
+type FormBuilderPadProps = {
+  formData: Form | null;
+};
+
+export default function FormBuilderPad({ formData }: FormBuilderPadProps) {
   const {
     addElementHandler,
     removeElementHandler,
     setSelectedElement,
     selectedElement,
     elements,
+    setElements,
   } = useFormBuilderContext();
+
+  useEffect(() => {
+    try {
+      const elements = JSON.parse(formData?.content!);
+      setElements(elements);
+    } catch (error) {
+      console.error("Failed to parse JSON:", error);
+    }
+  }, [formData, setElements]);
 
   const droppable = useDroppable({
     id: "form-builder-drop-area",
@@ -117,7 +135,28 @@ export default function FormBuilderPad() {
         "flex h-full max-w-3xl flex-grow flex-col rounded-lg bg-sidebar p-2",
         droppable.isOver && "ring-2 ring-primary",
       )}
-    ></div>
+    >
+      {!droppable.isOver && elements.length === 0 && (
+        <div className="flex h-full w-full select-none flex-col items-center justify-center gap-2 text-muted-foreground">
+          <GripIcon size={30} />
+          <p className="text-lg font-semibold capitalize">drop here</p>
+        </div>
+      )}
+
+      {elements.length > 0 && (
+        <div className="flex w-full flex-col gap-3 p-2">
+          {elements.map((element) => (
+            <FormElementWrapper key={element.id} element={element} />
+          ))}
+        </div>
+      )}
+
+      {droppable.isOver && elements.length === 0 && (
+        <div className="w-full p-2">
+          <div className="h-24 rounded-lg bg-secondary"></div>
+        </div>
+      )}
+    </div>
   );
 }
 
