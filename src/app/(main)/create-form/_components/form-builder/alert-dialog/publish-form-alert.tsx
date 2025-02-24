@@ -59,15 +59,20 @@ export default function PublishFormAlert() {
           submissionAccess: selectedValue,
         });
 
+        /*   console.log("@@@PUBLISH FORM ALERT -->> CLIENT: ", {
+          formId: formData?.id!,
+          submissionAccess: selectedValue,
+        }); */
+
         if (result.success) {
           toast({
-            title: "Success!",
+            title: "SUCCESS!",
             description: result.success,
           });
         } else {
           toast({
             variant: "destructive",
-            title: "Error!",
+            title: "ERROR!",
             description: result.error,
           });
         }
@@ -112,11 +117,11 @@ export default function PublishFormAlert() {
               onValueChange={handleSubmissionTypeChange}
             >
               <div className="flex items-center gap-2">
-                <RadioGroupItem value="authenticated" />
+                <RadioGroupItem value="AUTHENTICATED" />
                 <Label>Authenticated Users</Label>
               </div>
               <div className="flex items-center gap-2">
-                <RadioGroupItem value="everyone" />
+                <RadioGroupItem value="EVERYONE" />
                 <Label>Everyone</Label>
               </div>
             </RadioGroup>

@@ -7,6 +7,11 @@ type StatsCardsArrProps = {
   bounceRate: number;
 };
 
+/**
+ *
+ * @param
+ * @returns
+ */
 export const statsCardsArr = ({
   visits,
   submissions,

@@ -7,8 +7,8 @@ import { useFormBuilderContext } from "@/app/(main)/create-form/_hooks/use-form-
 import { Separator } from "@/components/ui/separator";
 import ElementsButtonsSidebar from "@/app/(main)/create-form/_components/form-builder/sidebar/elements-buttons-sidebar";
 import ElementsPropertiesSidebar from "@/app/(main)/create-form/_components/form-builder/sidebar/elements-properties-sidebar";
-import PublishFormAlert from "../alert-dialog/publish-form-alert";
-import SaveFormAlert from "../alert-dialog/save-form-alert";
+import PublishFormAlert from "@/app/(main)/create-form/_components/form-builder/alert-dialog/publish-form-alert";
+import SaveFormAlert from "@/app/(main)/create-form/_components/form-builder/alert-dialog/save-form-alert";
 
 export default function FormBuilderSidebar() {
   const { selectedElement, setSelectedElement } = useFormBuilderContext();
@@ -18,7 +18,7 @@ export default function FormBuilderSidebar() {
       <div className="space-y-6 px-5 py-6">
         <div className="space-y-3">
           <div className="flex items-center gap-3">
-            {/* <PublishFormAlert /> */}
+            <PublishFormAlert />
             <SaveFormAlert />
           </div>
           <p className="text-sm font-medium text-muted-foreground">

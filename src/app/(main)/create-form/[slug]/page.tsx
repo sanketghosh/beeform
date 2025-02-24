@@ -1,5 +1,5 @@
 import FormBuilder from "@/app/(main)/create-form/_components/form-builder/form-builder";
-import { getSingleForm } from "../../_data-fetchers/get-single-form";
+import { getSingleForm } from "@/app/(main)/_data-fetchers/get-single-form";
 
 type CreateFormProps = {
   params: {
