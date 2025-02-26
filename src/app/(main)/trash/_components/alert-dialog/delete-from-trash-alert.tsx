@@ -1,12 +1,15 @@
+"use client";
+
 // packages
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { Loader2Icon, TrashIcon } from "lucide-react";
 
 // local modules
-import { deletePermanentlyAction } from "@/actions/form.actions";
+import { useToast } from "@/hooks/use-toast";
+import deleteFormPermanentlyAction from "@/app/(main)/trash/_actions/delete-form-permanently-action";
 
 // components
-import { Loader2Icon, TrashIcon } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -27,23 +30,28 @@ type DeleteFromTrashAlertProps = {
 export default function DeleteFromTrashAlert({
   formId,
 }: DeleteFromTrashAlertProps) {
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: deletePermanentlyAction,
-    onSuccess: async (data) => {
-      toast.success(data.message);
-      queryClient.invalidateQueries({
-        queryKey: ["fetch-trashed-forms"],
-      });
-    },
-    onError: (error: any) => {
-      toast.error(error.response?.data?.message);
-    },
-  });
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const { toast } = useToast();
 
   const handleDeleteFormPermanently = () => {
-    mutation.mutate(formId);
+    startTransition(async () => {
+      const result = await deleteFormPermanentlyAction(formId);
+      if (result.success) {
+        toast({
+          title: "Success!",
+          description: result.success,
+        });
+        setInterval(() => {}, 1000);
+        router.push("/trash");
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Error!",
+          description: result.error,
+        });
+      }
+    });
   };
 
   return (
@@ -65,13 +73,9 @@ export default function DeleteFromTrashAlert({
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={handleDeleteFormPermanently}
-            disabled={mutation.isPending}
+            disabled={isPending}
           >
-            {mutation.isPending ? (
-              <Loader2Icon className="animate-spin" />
-            ) : (
-              "Delete"
-            )}
+            {isPending ? <Loader2Icon className="animate-spin" /> : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

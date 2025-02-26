@@ -1,3 +1,5 @@
+import { ElementsType } from "@/app/(main)/create-form/_types";
+
 export type NavbarDataType = {
   href: string;
   label: string;
@@ -30,3 +32,13 @@ export type StatsCardsType = {
 
 export type SortOrderType = "latest" | "oldest";
 export type SortStatusType = "all" | "published" | "unpublished";
+
+export type ColumnType = {
+  id: string;
+  label: string;
+  required: boolean;
+  type: ElementsType;
+};
+export type RowType = { [key: string]: string } & {
+  submittedAt: Date;
+};

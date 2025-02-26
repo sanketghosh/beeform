@@ -12,6 +12,7 @@ import { StatsCardsType } from "@/types";
 import { statsCardsArr } from "@/app/(main)/_data";
 import { getSingleForm } from "@/app/(main)/_data-fetchers/get-single-form";
 import { buttonVariants } from "@/components/ui/button";
+import { getFormWithSubmissions } from "@/app/(main)/single-form-data/_data-fetchers/get-form-with-submissions";
 
 // components
 import StatsCard from "@/app/(main)/_components/cards/stats-card";
@@ -23,7 +24,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import SharableLinkElement from "../_components/shareable-link-element";
+import SharableLinkElement from "@/app/(main)/single-form-data/_components/shareable-link-element";
+import FormSubmissionsTable from "@/app/(main)/single-form-data/_components/form-submissions-table";
 
 type SingleFormDataProps = {
   params: {
@@ -35,6 +37,9 @@ export default async function SingleFormData({ params }: SingleFormDataProps) {
   const { slug } = await params;
   const { form, statsData } = await getSingleForm(slug);
   const { visits, submissions, submissionRate, bounceRate } = statsData;
+  const { formWithSubmissions } = await getFormWithSubmissions(slug);
+
+  // console.log("@@@--> FORM SUBMISSIONS: ", formWithSubmissions);
 
   const { statsCards } = statsCardsArr({
     visits,
@@ -131,6 +136,10 @@ export default async function SingleFormData({ params }: SingleFormDataProps) {
         ))}
       </div>
       <Separator />
+      <FormSubmissionsTable
+        formSubmissions={formWithSubmissions?.formSubmissions}
+        formContent={formWithSubmissions?.content}
+      />
     </div>
   );
 }

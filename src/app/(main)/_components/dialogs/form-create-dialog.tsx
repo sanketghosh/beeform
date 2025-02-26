@@ -11,7 +11,7 @@ export default function FormCreateDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size={"lg"}>
+        <Button size={"default"}>
           <CirclePlusIcon size={22} />
           Create Form
         </Button>

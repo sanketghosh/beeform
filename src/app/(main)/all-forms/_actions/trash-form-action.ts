@@ -1,10 +1,17 @@
 "use server";
 
-import { getSessionData } from "@/utils/get-session";
 import { prisma } from "@/lib/prisma";
+import { getSessionData } from "@/utils/get-session";
 
-export const moveToTrashAction = async (formId: string) => {
+export const trashFormAction = async (formId: string) => {
   const { authenticatedUserId } = await getSessionData();
+
+  // if form id is not provided
+  if (!formId) {
+    return {
+      error: "Form is needed but not provided.",
+    };
+  }
 
   // if user is not authenticated
   if (!authenticatedUserId) {
@@ -12,20 +19,23 @@ export const moveToTrashAction = async (formId: string) => {
       error: "User is not authenticated.",
     };
   }
+
   try {
+    // find tne form
     const form = await prisma.form.findUnique({
       where: {
         id: formId,
       },
     });
 
-    // if form is not found
+    // if form not found
     if (!form) {
       return {
-        error: "Form has not been not found.",
+        error: "Form has not been found.",
       };
     }
 
+    // if found trash the form / send to trash
     const trashedForm = await prisma.form.update({
       where: {
         id: formId,
@@ -36,14 +46,16 @@ export const moveToTrashAction = async (formId: string) => {
       },
     });
 
+    // if fails to send to trash
     if (!trashedForm) {
       return {
-        error: "",
+        error: "Failed to send the form to trash.",
       };
     }
 
     return {
-      success: "Form has been trashed.",
+      data: trashedForm,
+      success: "Form has been sent to trash.",
     };
   } catch (error) {
     let message = "Unexpected error";

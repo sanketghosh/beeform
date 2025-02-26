@@ -87,15 +87,17 @@ export default function PublishFormAlert() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
-          className="w-full"
-          variant={"default"}
-          size={"sm"}
-          disabled={contentArray.length === 0}
-        >
-          <Globe2Icon />
-          Public
-        </Button>
+        {!formData?.published && (
+          <Button
+            className="w-full"
+            variant={"default"}
+            size={"sm"}
+            disabled={contentArray.length === 0}
+          >
+            <Globe2Icon />
+            Public
+          </Button>
+        )}
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

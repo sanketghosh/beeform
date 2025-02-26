@@ -50,7 +50,7 @@ export default function SharableLinkElement({
       <Input
         value={fullUrlToShare}
         readOnly
-        className="bg-secondary text-[13px] font-medium"
+        className="bg-secondary/30 text-[13px] font-medium"
       />
       <Button size={"sm"} variant={"default"} onClick={urlCopyHandler}>
         {isCopied ? (

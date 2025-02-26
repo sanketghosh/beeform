@@ -17,7 +17,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import TrashAlert from "@/app/(main)/_components/alert-dialogs/trash-alert";
+import TrashFormAlert from "@/app/(main)/all-forms/_components/alert-dialog/trash-form-alert";
+import DeleteFromTrashAlert from "@/app/(main)/trash/_components/alert-dialog/delete-from-trash-alert";
+import RecoverFromTrashAlert from "@/app/(main)/trash/_components/alert-dialog/recover-from-trash-alert";
 /* import TrashAlert from "@/components/alert-dialog/trash-alert";
 import RecoverFromTrashAlert from "@/components/alert-dialog/recover-from-trash-alert";
 import DeleteFromTrashAlert from "@/components/alert-dialog/delete-from-trash-alert"; */
@@ -66,11 +68,11 @@ export default function FormCard({
           </div>
         </div>
 
-        <p className="text-sm font-medium text-muted-foreground">
+        <div className="text-sm font-medium text-muted-foreground">
           {/* {published ? "Published" : "Last updated"} on {formattedDate} */}
           {isTrashed ? (
             <div>
-              <p>Trashed {formatDate(trashedAt!, "yyyy-MM-dd")}</p>
+              <p>Trashed on {formatDate(trashedAt!, "yyyy-MM-dd")}</p>
               {/* {timeLeft! > 0 && (
                 <p>
                   Will be deleted in {minutes}:
@@ -79,15 +81,15 @@ export default function FormCard({
               )} */}
             </div>
           ) : (
-            <>Created {formatDate(createdAt!, "yyyy-MM-dd")}</>
+            <p>Created {formatDate(createdAt!, "yyyy-MM-dd")}</p>
           )}
-        </p>
+        </div>
       </CardContent>
       <CardFooter className="flex w-full items-center justify-end gap-3 lg:justify-between">
         {isTrashed ? (
           <>
-            {/* <RecoverFromTrashAlert formId={id} /> */}
-            {/* <DeleteFromTrashAlert formId={id} /> */}
+            <RecoverFromTrashAlert formId={id} />
+            <DeleteFromTrashAlert formId={id} />
           </>
         ) : (
           <>
@@ -106,7 +108,7 @@ export default function FormCard({
                   <PenIcon size={17} />
                   <p>Edit Form</p>
                 </Link>
-                <TrashAlert formId={id} />
+                <TrashFormAlert formId={id} />
               </div>
             ) : (
               <div className="flex w-full items-center gap-3">
@@ -123,7 +125,7 @@ export default function FormCard({
                   <EyeIcon size={17} />
                   <p>Form Data</p>
                 </Link>
-                <TrashAlert formId={id} />
+                <TrashFormAlert formId={id} />
               </div>
             )}
           </>

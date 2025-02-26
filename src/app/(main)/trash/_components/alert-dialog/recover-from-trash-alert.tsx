@@ -1,13 +1,13 @@
 "use client";
 
 // packages
-import { useTransition } from "react";
+import { Loader2Icon, RotateCwIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { ArchiveIcon, Loader2Icon } from "lucide-react";
+import { useTransition } from "react";
 
 // local modules
-import { moveToTrashAction } from "@/app/(main)/_actions/move-to-trash-action";
 import { useToast } from "@/hooks/use-toast";
+import recoverFromTrashAction from "@/app/(main)/trash/_actions/recover-from-trash-action";
 
 // components
 import {
@@ -23,21 +23,27 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 
-export default function TrashAlert({ formId }: { formId: string }) {
-  const { toast } = useToast();
+type RecoverFromTrashAlertProps = {
+  formId: string;
+};
+
+export default function RecoverFromTrashAlert({
+  formId,
+}: RecoverFromTrashAlertProps) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const { toast } = useToast();
 
-  const trashFormHandler = () => {
+  const recoverFromTrashHandler = () => {
     startTransition(async () => {
-      const result = await moveToTrashAction(formId);
+      const result = await recoverFromTrashAction(formId);
       if (result.success) {
         toast({
           title: "Success!",
           description: result.success,
         });
         setInterval(() => {}, 1000);
-        router.push("/dashboard");
+        router.push("/trash");
       } else {
         toast({
           variant: "destructive",
@@ -51,26 +57,25 @@ export default function TrashAlert({ formId }: { formId: string }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size={"sm"} variant={"destructive"}>
-          <ArchiveIcon />
+        <Button className="w-full" size={"sm"} variant={"secondary"}>
+          <RotateCwIcon />
+          Recover
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Send this form to trash ?</AlertDialogTitle>
+          <AlertDialogTitle>Recover your form from trash ?</AlertDialogTitle>
           <AlertDialogDescription>
-            It will stay in trash for 30 days before it deletes permanently.
+            Continuing this will recover your form from trash.
           </AlertDialogDescription>
         </AlertDialogHeader>
-
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
+            onClick={recoverFromTrashHandler}
             disabled={isPending}
-            onClick={trashFormHandler}
-            className="bg-destructive text-destructive-foreground hover:bg-destructive/60"
           >
-            {isPending ? <Loader2Icon className="animate-spin" /> : "Trash"}
+            {isPending ? <Loader2Icon className="animate-spin" /> : "Recover"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

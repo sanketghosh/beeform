@@ -14,6 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import StatsCard from "@/app/(main)/_components/cards/stats-card";
 import { buttonVariants } from "@/components/ui/button";
 import FormCreateDialog from "@/app/(main)/_components/dialogs/form-create-dialog";
+import AllFormsStatsCharts from "./_components/all-forms-stats-charts";
 
 export default async function Dashboard() {
   const { name } = await getSessionData();
@@ -28,11 +29,11 @@ export default async function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-xl font-semibold md:text-2xl lg:text-3xl xl:text-4xl">
+      <div className="space-y-2">
+        <h1 className="text-xl font-bold md:text-2xl lg:text-3xl xl:text-4xl">
           Hi! <span className="text-primary">{name}</span>. Whassup ?
         </h1>
-        <p className="font-medium text-muted-foreground">
+        <p className="font-medium leading-tight text-muted-foreground md:text-lg xl:text-xl">
           Welcome to your dashboard. You can create, manage, organize and check
           form stats here.
         </p>
@@ -45,7 +46,7 @@ export default async function Dashboard() {
         <Link
           className={cn(
             buttonVariants({
-              size: "lg",
+              size: "default",
               variant: "secondary",
             }),
           )}
@@ -73,6 +74,7 @@ export default async function Dashboard() {
       </div>
 
       <Separator />
+      <AllFormsStatsCharts />
     </div>
   );
 }

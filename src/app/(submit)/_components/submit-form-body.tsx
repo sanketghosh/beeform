@@ -152,7 +152,7 @@ function FormSubmitComponent({
   props: { formSubmissionAccess, shareURL, content },
 }: FormSubmitComponentProps) {
   let parsedContent: FormElementInstance[] = [];
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
@@ -240,10 +240,17 @@ function FormSubmitComponent({
         content: JSONContent,
         device: deviceType,
       });
-
       if (result.success) {
         toast({
           title: "SUCCESS!",
+          description: result.success,
+        });
+        setFormSubmitted(true);
+      } else {
+        toast({
+          variant: "destructive",
+          title: "ERROR!",
+          description: result.error,
         });
       }
     });
