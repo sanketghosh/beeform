@@ -58,11 +58,11 @@ const MENU_LINKS: MenuLinkType[] = [
     text: "Notifications",
     icon: BellIcon,
   }, */
-  {
+  /* {
     href: "/settings",
     text: "Settings",
     icon: SettingsIcon,
-  },
+  }, */
 ];
 
 export default function NavMain() {

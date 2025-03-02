@@ -50,7 +50,7 @@ export default function StartFormCreationForm() {
           description: result.success,
         });
         setInterval(() => {}, 1000);
-        router.push("/dashboard");
+        router.push("/all-forms");
       } else {
         toast({
           variant: "destructive",

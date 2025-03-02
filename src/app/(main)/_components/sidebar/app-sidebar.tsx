@@ -18,6 +18,7 @@ import Link from "next/link";
 import MainLink from "@/components/main-link";
 import Beehive from "@/assets/beehive";
 import NavProjects from "../nav/nav-projects";
+import NavUser from "../nav/nav-user";
 
 // This is sample data.
 
@@ -44,7 +45,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain />
         <NavProjects />
       </SidebarContent>
-      <SidebarFooter>{/* <NavUser /> */}</SidebarFooter>
+      <SidebarFooter>
+        <NavUser />
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );

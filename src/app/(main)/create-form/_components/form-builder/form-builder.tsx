@@ -1,7 +1,13 @@
 "use client";
 
 // packages
-import { DndContext, MouseSensor, useSensor, useSensors } from "@dnd-kit/core";
+import {
+  DndContext,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { useEffect } from "react";
 import Confetti from "react-confetti";
 
@@ -48,7 +54,7 @@ export default function FormBuilder({ formData }: FormBuilderProps) {
     },
   });
 
-  const touchSensor = useSensor(MouseSensor, {
+  const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
       distance: 10,
     },

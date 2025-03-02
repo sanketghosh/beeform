@@ -6,6 +6,7 @@ import {
   SaveFormSchema,
   SaveFormSchemaType,
 } from "@/app/(main)/create-form/_schemas";
+import { revalidatePath } from "next/cache";
 
 export const saveFormAction = async (values: SaveFormSchemaType) => {
   // console.log(values);
@@ -75,6 +76,7 @@ export const saveFormAction = async (values: SaveFormSchemaType) => {
       };
     }
 
+    revalidatePath("/");
     return {
       success: "Form updated successfully.",
       data: updateForm,

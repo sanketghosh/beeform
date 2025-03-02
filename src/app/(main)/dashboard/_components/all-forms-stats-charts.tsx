@@ -1,15 +1,21 @@
 // local modules
-import getDailyStats from "@/app/(main)/dashboard/_data-fetchers/get-daily-stats";
+import { getLocationWiseSubmissionStats } from "@/app/(main)/dashboard/_data-fetchers/get-location-wise-submission-stats";
+import { getDailyStats } from "@/app/(main)/dashboard/_data-fetchers/get-daily-stats";
 
 // components
 import AllFormsOverallStatistics from "@/app/(main)/dashboard/_components/charts/all-forms-overall-statistics";
 import AllFormsOverallLocationStats from "@/app/(main)/dashboard/_components/charts/all-forms-overall-location-stats";
-import { getLocationWiseSubmissionStats } from "../_data-fetchers/get-location-wise-submission-stats";
 
-export default async function AllFormsStatsCharts() {
-  const { chartData } = await getDailyStats();
+type AllFormsStatsChartsProps = {
+  userId: string;
+};
+
+export default async function AllFormsStatsCharts({
+  userId,
+}: AllFormsStatsChartsProps) {
+  const { chartData } = await getDailyStats(userId);
   const { cities, continents, countries, devices } =
-    await getLocationWiseSubmissionStats();
+    await getLocationWiseSubmissionStats(userId);
 
   /*   console.log("@@@->> ALL FORMS STATS COMPONENT ->> DASHBOARD : ", {
     cities,

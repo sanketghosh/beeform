@@ -1,6 +1,10 @@
-import { SidebarTrigger } from "@/components/ui/sidebar";
+// local modules
 import FormPreviewDialog from "@/app/(main)/create-form/_components/form-builder/dialog/form-preview-dialog";
-import { useSingleFormData } from "../../../_hooks/use-single-form-data";
+import { useSingleFormData } from "@/app/(main)/create-form/_hooks/use-single-form-data";
+
+// components
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import MobileFormBuilderSidebar from "../sidebar/mobile-form-builder-sidebar";
 
 export default function FormBuilderNav() {
   const { formData } = useSingleFormData();
@@ -15,7 +19,10 @@ export default function FormBuilderNav() {
           <h2 className="truncate font-medium">{formData?.title}</h2>
         </div>
 
-        <FormPreviewDialog />
+        <div className="flex items-center gap-3">
+          <FormPreviewDialog />
+          <MobileFormBuilderSidebar />
+        </div>
       </div>
     </nav>
   );

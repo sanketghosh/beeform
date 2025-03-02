@@ -17,7 +17,7 @@ import FormCreateDialog from "@/app/(main)/_components/dialogs/form-create-dialo
 import AllFormsStatsCharts from "./_components/all-forms-stats-charts";
 
 export default async function Dashboard() {
-  const { name } = await getSessionData();
+  const { name, authenticatedUserId } = await getSessionData();
   const { bounceRate, submissionRate, submissions, visits } =
     await fetchFormsStats();
   const { statsCards } = statsCardsArr({
@@ -74,7 +74,7 @@ export default async function Dashboard() {
       </div>
 
       <Separator />
-      <AllFormsStatsCharts />
+      <AllFormsStatsCharts userId={authenticatedUserId!} />
     </div>
   );
 }

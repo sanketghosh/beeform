@@ -37,7 +37,19 @@ export default function PublishFormAlert() {
 
   // console.log("@@PUBLISH FORM ALERT: ", formData?.content);
 
-  const contentArray = JSON.parse(formData?.content!);
+  // const contentArray = JSON.parse(formData?.content!) || [];
+
+  let contentArray: any[] = [];
+
+  try {
+    if (formData?.content) {
+      contentArray = JSON.parse(formData.content) as any[];
+    }
+  } catch (error) {
+    console.error("JSON Parse Error:", error, formData?.content);
+    contentArray = []; // Fallback to an empty array if parsing fails
+  }
+
   function publishFormHandler() {
     if (elements.length === 0) {
       toast({

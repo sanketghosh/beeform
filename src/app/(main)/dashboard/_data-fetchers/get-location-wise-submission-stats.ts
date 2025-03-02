@@ -145,7 +145,7 @@ interface FormSubmissionWithLocation {
   device: string | null;
 }
 
-export async function getLocationWiseSubmissionStats() {
+export async function getLocationWiseSubmissionStats(userId: string) {
   const getAggregatedStats = async (
     locationType: "city" | "country" | "continent" | "device",
   ) => {
@@ -159,6 +159,9 @@ export async function getLocationWiseSubmissionStats() {
           device: true,
         },
         where: {
+          form: {
+            userId: userId,
+          },
           [locationType]: { not: null }, // Ensure we only process valid locations
         },
       });

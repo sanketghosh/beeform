@@ -1,6 +1,13 @@
 import { prisma } from "@/lib/prisma";
 
-export default async function getDailyStats() {
+export async function getDailyStats(userId: string) {
+  /*  const userForms = await prisma.form.findMany({
+    where: { userId: userId },
+    select: { id: true }, // Only fetch IDs
+  });
+
+  const userFormIds = userForms.map((form) => form.id); */
+
   const dailyStats = await prisma.formDailyStats.groupBy({
     by: ["date"],
     _sum: {
@@ -10,6 +17,11 @@ export default async function getDailyStats() {
     _avg: {
       responsePercentage: true,
       bounceRate: true,
+    },
+    where: {
+      form: {
+        userId: userId,
+      },
     },
     orderBy: {
       date: "asc", // Sort by date ascending

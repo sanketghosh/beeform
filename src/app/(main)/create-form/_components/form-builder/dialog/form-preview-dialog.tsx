@@ -3,6 +3,11 @@
 // packages
 import { Columns2Icon } from "lucide-react";
 
+// local modules
+import { cn } from "@/lib/utils";
+import { useSingleFormData } from "@/app/(main)/create-form/_hooks/use-single-form-data";
+import { useFormBuilderContext } from "@/app/(main)/create-form/_hooks/use-form-builder-context";
+
 // components
 import { Button } from "@/components/ui/button";
 import {
@@ -13,11 +18,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import SingleElementBaseStyle from "../single-element-base-style";
-import { FormElements } from "../elements/form-builder-elements";
-import { useFormBuilderContext } from "../../../_hooks/use-form-builder-context";
-import { useSingleFormData } from "../../../_hooks/use-single-form-data";
-import { cn } from "@/lib/utils";
+import SingleElementBaseStyle from "@/app/(main)/create-form/_components/form-builder/single-element-base-style";
+import { FormElements } from "@/app/(main)/create-form/_components/form-builder/elements/form-builder-elements";
 
 export default function FormPreviewDialog() {
   const { elements } = useFormBuilderContext();
