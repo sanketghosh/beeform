@@ -19,9 +19,19 @@
 3. [Key Features](#features)
 4. [Setup Instructions](#setup-instruction)
 
+---
+
+<div align="center">
+  <br />
+    <a href="https://github.com/sanketghosh/beeform" target="_blank">
+      <img src="https://github.com/sanketghosh/beeform/blob/main/public/beeform.png" alt="Beeform Repo Banner">
+    </a>
+  <br />
+</div>
+
 ## <a name="overview">Overview</a>
 
-This project is a form builder application developed using Bun, Next.js, TypeScript, PostgreSQL, Prisma, and Dnd Kit. It allows users to create custom forms through a drag-and-drop interface and stores form data in a PostgreSQL database.
+A form builder application developed using Bun, Next.js, TypeScript, PostgreSQL, Prisma, and Dnd Kit. It allows users to create custom forms through a drag-and-drop interface and stores form data in a PostgreSQL database.
 
 ## <a name="tech-stack">Technologies Used</a>
 
