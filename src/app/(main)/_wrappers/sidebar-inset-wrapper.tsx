@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 // local modules
 import { cn } from "@/lib/utils";
+import extractSingleFormUrlID from "@/app/(main)/_utils/extract-single-form-url-id";
 
 // components
 import {
@@ -29,6 +30,7 @@ export default function SidebarInsetWrapper({
 
   let isOnDashboard = pathname === "/dashboard";
   let isOnCreateForm = pathname.startsWith("/create-form/");
+  let isOnSingleFormData = pathname.startsWith("/single-form-data/");
 
   return (
     <SidebarInset className="relative">
@@ -49,7 +51,11 @@ export default function SidebarInsetWrapper({
                     <BreadcrumbSeparator className="hidden md:block" />
                     <BreadcrumbItem>
                       <BreadcrumbPage className="font-semibold capitalize">
-                        {pathname?.slice(1)}
+                        {!isOnSingleFormData ? (
+                          <>{pathname?.slice(1)}</>
+                        ) : (
+                          <>{extractSingleFormUrlID(pathname?.slice(1))}</>
+                        )}
                       </BreadcrumbPage>
                     </BreadcrumbItem>
                   </>
@@ -72,3 +78,9 @@ export default function SidebarInsetWrapper({
     </SidebarInset>
   );
 }
+
+/* 
+
+write a TS function which will return," Single Form Data - cm7ozablw0005lcb6rvaz61vf", on giving a string like "single-form-data/cm7ozablw0005lcb6rvaz61vf"
+
+*/

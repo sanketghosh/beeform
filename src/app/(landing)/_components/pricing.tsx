@@ -98,7 +98,7 @@ export default function Pricing() {
           ))}
         </div>
         <div className="mx-auto mt-10 w-fit">
-          <div className="rounded-full border bg-secondary/30 px-3 py-1 text-center text-lg font-semibold">
+          <div className="rounded-full border bg-secondary/30 px-3 py-1 text-center text-sm font-semibold">
             Also customized pricing available, contact us.
           </div>
         </div>

@@ -3,6 +3,7 @@ import Hero from "@/app/(landing)/_components/hero";
 import Specialty from "./_components/specialty";
 import Pricing from "./_components/pricing";
 import Testimonials from "./_components/testimonials";
+import Footer from "./_components/footer";
 
 export default function Preview() {
   return (
@@ -12,6 +13,7 @@ export default function Preview() {
       <Specialty />
       <Testimonials />
       <Pricing />
+      <Footer />
     </main>
   );
 }

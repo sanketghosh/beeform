@@ -1,12 +1,12 @@
 "use client";
 
 // packages
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Loader2Icon, LogOutIcon, UserIcon } from "lucide-react";
 
 // local modules
 import { FormEvent, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { authClient } from "@/lib/auth-client";
 import { useSidebar } from "@/components/ui/sidebar";
@@ -21,6 +21,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import LogoutButton from "@/app/(main)/_components/buttons/logout-button";
 
 type NavUserDropdownProps = {
   name: string;
@@ -103,23 +104,7 @@ export default function NavUserDropdown({ email, name }: NavUserDropdownProps) {
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuItem>
-        <form onSubmit={signOutHandler} className="w-full">
-          <Button
-            className="flex w-full cursor-pointer items-center justify-start gap-2"
-            variant={"destructive"}
-            disabled={isPending}
-            type="submit"
-          >
-            {isPending ? (
-              <Loader2Icon className="animate-spin" />
-            ) : (
-              <>
-                <LogOutIcon className="size-5" />
-                Log out
-              </>
-            )}
-          </Button>
-        </form>
+        <LogoutButton />
       </DropdownMenuItem>
     </DropdownMenuContent>
   );
