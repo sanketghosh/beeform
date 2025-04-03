@@ -37,6 +37,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "dedent": "^1.5.3",
+    "framer-motion": "^12.6.3",
     "holy-loader": "^2.3.13",
     "jotai": "^2.12.0",
     "lucide-react": "^0.475.0",

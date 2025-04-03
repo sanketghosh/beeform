@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "beeform | authentication",
+  title: "FitFusion | authentication",
   description:
     "beeform is a minimal drag and drop form builder, helps you to build form in minutes.",
 };

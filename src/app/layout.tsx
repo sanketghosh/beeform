@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/providers/theme-provider";
 
 export const metadata: Metadata = {
-  title: "beeform",
+  title: "FitFusion",
   description:
     "Create forms in minutes by just dragging and dropping components.",
 };

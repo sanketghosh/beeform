@@ -3,14 +3,11 @@ import type { Metadata } from "next";
 
 // local modules
 import "@/app/globals.css";
-
-// components
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/app/(main)/_components/sidebar/app-sidebar";
-import SidebarInsetWrapper from "@/app/(main)/_wrappers/sidebar-inset-wrapper";
+import Navbar from "./_components/navbar";
+import { getSessionData } from "@/utils/get-session";
 
 export const metadata: Metadata = {
-  title: "beeform",
+  title: "FitFusion",
   description:
     "Create forms in minutes by just dragging and dropping components.",
 };
@@ -20,10 +17,16 @@ export default async function MainLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { name, email, authenticatedUserId } = await getSessionData();
+
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInsetWrapper>{children}</SidebarInsetWrapper>
-    </SidebarProvider>
+    <div>
+      <Navbar />
+      <section className="w-full">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-10 md:px-6">
+          {children}
+        </div>
+      </section>
+    </div>
   );
 }

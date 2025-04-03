@@ -1,0 +1,137 @@
+{
+  "bmiCategories": [
+    {
+      "range": [0, 18.5],
+      "label": "Underweight",
+      "recommendation": "Focus on nutrient-dense foods and consider consulting a healthcare provider or dietitian. Strength training can help build muscle mass."
+    },
+    {
+      "range": [18.5, 25],
+      "label": "Healthy Weight",
+      "recommendation": "Maintain a balanced diet and regular exercise routine. Focus on your specific fitness goals (muscle gain, endurance, etc.)."
+    },
+    {
+      "range": [25, 30],
+      "label": "Overweight",
+      "recommendation": "Focus on creating a moderate calorie deficit through diet and increased activity. Prioritize whole foods and portion control. Resistance training is beneficial."
+    },
+    {
+      "range": [30, 35],
+      "label": "Obese Class I",
+      "recommendation": "A more significant calorie deficit and consistent exercise are recommended. Consider consulting a healthcare provider for guidance. Focus on sustainable lifestyle changes."
+    },
+    {
+      "range": [35, 40],
+      "label": "Obese Class II",
+      "recommendation": "Professional guidance from a healthcare provider or registered dietitian is strongly advised. Focus on gradual changes, increased daily movement, and a structured eating plan."
+    },
+    {
+      "range": [40, 1000],
+      "label": "Obese Class III (Severe)",
+      "recommendation": "Medical supervision is highly recommended. Focus on overall health improvement, mobility, and consult professionals for a safe and effective plan."
+    }
+  ],
+  "bfpCategories": {
+    "Male": [
+      {
+        "range": [0, 6],
+        "label": "Essential Fat / Ultra Lean",
+        "enum": "ULTRA_LEAN"
+      },
+      {
+        "range": [6, 10],
+        "label": "Athletes / Very Lean",
+        "enum": "VERY_LEAN"
+      },
+      { "range": [10, 14], "label": "Fitness / Lean", "enum": "LEAN" },
+      {
+        "range": [14, 17],
+        "label": "Average / Moderately Lean",
+        "enum": "MODERATELY_LEAN"
+      },
+      { "range": [17, 22], "label": "Acceptable / Healthy", "enum": "HEALTHY" },
+      {
+        "range": [22, 25],
+        "label": "Fair / Moderately Overweight",
+        "enum": "MODERATELY_OVERWEIGHT"
+      },
+      { "range": [25, 30], "label": "Poor / Overweight", "enum": "OVERWEIGHT" },
+      { "range": [30, 40], "label": "Obese", "enum": "OBESE" },
+      {
+        "range": [40, 100],
+        "label": "Extremely Obese",
+        "enum": "EXTREMELY_OBESE"
+      }
+    ],
+    "Female": [
+      {
+        "range": [0, 14],
+        "label": "Essential Fat / Ultra Lean",
+        "enum": "ULTRA_LEAN"
+      },
+      {
+        "range": [14, 18],
+        "label": "Athletes / Very Lean",
+        "enum": "VERY_LEAN"
+      },
+      { "range": [18, 21], "label": "Fitness / Lean", "enum": "LEAN" },
+      {
+        "range": [21, 24],
+        "label": "Average / Moderately Lean",
+        "enum": "MODERATELY_LEAN"
+      },
+      { "range": [24, 29], "label": "Acceptable / Healthy", "enum": "HEALTHY" },
+      {
+        "range": [29, 33],
+        "label": "Fair / Moderately Overweight",
+        "enum": "MODERATELY_OVERWEIGHT"
+      },
+      { "range": [33, 38], "label": "Poor / Overweight", "enum": "OVERWEIGHT" },
+      { "range": [38, 45], "label": "Obese", "enum": "OBESE" },
+      {
+        "range": [45, 100],
+        "label": "Extremely Obese",
+        "enum": "EXTREMELY_OBESE"
+      }
+    ]
+  },
+  "activityMultipliers": {
+    "ZERO_MOVEMENTS": 1.2,
+    "FEW_MOVEMENTS": 1.375,
+    "MODERATELY_ACTIVE": 1.55,
+    "VERY_ACTIVE": 1.725
+  },
+  "idealWeightFactors": {
+    "Male": { "baseKg": 52, "kgPerInch": 1.9 },
+    "Female": { "baseKg": 49, "kgPerInch": 1.7 }
+  },
+  "weightLossFactors": [
+    "Maintain a consistent calorie deficit (consume fewer calories than you burn).",
+    "Prioritize protein intake to preserve muscle mass and aid satiety.",
+    "Increase daily physical activity, including both cardio and strength training.",
+    "Focus on whole, unprocessed foods (vegetables, fruits, lean proteins, whole grains).",
+    "Stay hydrated by drinking plenty of water throughout the day.",
+    "Manage portion sizes and be mindful of calorie-dense foods and drinks.",
+    "Get adequate sleep (7-9 hours) as it affects hormones related to hunger and metabolism.",
+    "Be patient and consistent; sustainable fat loss takes time."
+  ],
+  "muscleGainTips": [
+    "Consume a moderate calorie surplus (slightly more calories than you burn).",
+    "Prioritize protein intake (around 1.6-2.2g per kg of body weight) distributed throughout the day.",
+    "Engage in progressive overload strength training (gradually increasing weight, reps, or sets).",
+    "Focus on compound exercises (squats, deadlifts, bench press, rows).",
+    "Allow for adequate rest and recovery between workouts; muscles grow during rest.",
+    "Ensure sufficient carbohydrate intake to fuel workouts and replenish glycogen.",
+    "Get adequate sleep (7-9 hours) for muscle repair and hormone regulation.",
+    "Stay consistent with both training and nutrition."
+  ],
+  "cardioTips": [
+    "Aim for at least 150 minutes of moderate-intensity or 75 minutes of vigorous-intensity aerobic activity per week.",
+    "Incorporate a mix of activities you enjoy (running, cycling, swimming, brisk walking, dancing).",
+    "Include warm-ups before and cool-downs after each cardio session.",
+    "Gradually increase duration or intensity to continue improving.",
+    "Listen to your body and incorporate rest days.",
+    "Combine cardio with strength training for overall health benefits.",
+    "Maintain a balanced diet to support energy levels and recovery."
+  ]
+}

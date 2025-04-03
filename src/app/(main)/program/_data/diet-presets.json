@@ -1,0 +1,20 @@
+{
+  "macronutrientProfiles": {
+    "BURN_FATS": { "proteinRatio": 0.35, "carbRatio": 0.4, "fatRatio": 0.25 },
+    "BUILD_MUSCLE": {
+      "proteinRatio": 0.3,
+      "carbRatio": 0.45,
+      "fatRatio": 0.25
+    },
+    "CARDIOVASCULAR_HEALTH": {
+      "proteinRatio": 0.25,
+      "carbRatio": 0.5,
+      "fatRatio": 0.25
+    }
+  },
+  "proteinPerKg": {
+    "BURN_FATS": 1.8,
+    "BUILD_MUSCLE": 2.0,
+    "CARDIOVASCULAR_HEALTH": 1.5
+  }
+}

@@ -11,7 +11,7 @@ export default {
     extend: {
       fontFamily: {
         instrumentSans: ["Instrument Sans", "serif"],
-        instrumentSerif: ["Instrument Serif", "serif"],
+        boldonse: ["Boldonse", "system-ui"],
       },
       backgroundImage: {
         chequered:
