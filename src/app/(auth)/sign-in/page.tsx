@@ -24,7 +24,7 @@ export default function SignIn() {
           </div>
           <div className="absolute bottom-4 left-4 right-4">
             <h1 className="text-xl text-white">
-              Don't get stung by boring, clunky forms. With BeeForm, you'll
+              Don't get stung by boring, clunky forms. With zapform, you'll
               create forms that are as smooth as honey, as flexible as a bee in
               flight, and as effective as a hive on a mission. So, what are you
               waiting for? Join the buzz and start building forms that sting the
@@ -37,7 +37,7 @@ export default function SignIn() {
             href={"/sign-up"}
             className={cn(
               buttonVariants({
-                variant: "ghost",
+                variant: "secondary",
               }),
               "absolute right-4 top-4",
             )}

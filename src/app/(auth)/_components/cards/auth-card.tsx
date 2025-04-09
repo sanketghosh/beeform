@@ -43,7 +43,7 @@ export default function AuthCardWrapper({
       </Link> */}
       <Card className="w-full sm:w-[400px] md:w-[450px] lg:w-[490px]">
         <CardHeader>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle className="font-boldonse">{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
         </CardHeader>
         <CardContent>{children}</CardContent>

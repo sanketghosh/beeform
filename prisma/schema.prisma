@@ -13,48 +13,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Sex {
-  Male
-  Female
-}
-
-enum BodyFatCategory {
-  ULTRA_LEAN
-  VERY_LEAN
-  LEAN
-  MODERATELY_LEAN
-  HEALTHY
-  MODERATELY_OVERWEIGHT
-  OVERWEIGHT
-  OBESE
-  EXTREMELY_OBESE
-}
-
-enum FitnessGoal {
-  BURN_FATS
-  CARDIOVASCULAR_HEALTH
-  BUILD_MUSCLE
-}
-
-enum ActivityLevel {
-  ZERO_MOVEMENTS
-  FEW_MOVEMENTS
-  MODERATELY_ACTIVE
-  VERY_ACTIVE
+enum SubmissionAccess {
+  EVERYONE
+  AUTHENTICATED
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String
-  email         String
-  emailVerified Boolean
-  image         String?
-  createdAt     DateTime
-  updatedAt     DateTime
-  sessions      Session[]
-  accounts      Account[]
-
-  programInformation ProgramInformation[]
+  id              String           @id @default(cuid())
+  name            String
+  email           String
+  emailVerified   Boolean
+  image           String?
+  createdAt       DateTime
+  updatedAt       DateTime
+  sessions        Session[]
+  accounts        Account[]
+  forms           Form[]
+  formSubmissions FormSubmission[]
 
   @@unique([email])
   @@map("user")
@@ -105,27 +80,72 @@ model Verification {
   @@map("verification")
 }
 
-model ProgramInformation {
-  id                String          @id @default(cuid())
-  name              String
-  age               Int
-  sex               Sex
-  height            Float
-  weight            Float
-  usedMeasuringTape Boolean         @default(false)
-  neck              Float
-  waist             Float
-  bodyFatCategory   BodyFatCategory
-  fitnessGoal       FitnessGoal
-  workoutDays       Int
-  activityLevel     ActivityLevel
-  uniqueUrlId       String          @unique
-
+model Form {
+  id        String   @id @default(cuid())
+  userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
 
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String?
+  title       String
+  description String @default("")
+  content     String @default("[]")
 
-  @@map("program_information")
+  visitsCount      Int @default(0)
+  submissionsCount Int @default(0)
+
+  shareURL String @unique @default(uuid())
+
+  submissionAccess SubmissionAccess @default(EVERYONE)
+  isTrashed        Boolean          @default(false)
+  trashedAt        DateTime?
+
+  formSubmissions FormSubmission[]
+  user            User             @relation(fields: [userId], references: [id])
+
+  dailyStats FormDailyStats[]
+
+  @@map("forms")
+}
+
+model FormSubmission {
+  id          String   @id @default(cuid())
+  formId      String
+  submittedAt DateTime @default(now())
+  form        Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+
+  content String // Captured form data in JSON
+
+  city      String?
+  country   String?
+  continent String?
+  device    String?
+
+  @@unique([formId, userId])
+  @@map("form_submissions")
+}
+
+model FormDailyStats {
+  id                 String   @id @default(uuid())
+  formId             String
+  date               DateTime
+  visitsCount        Int      @default(0)
+  submissions        Int      @default(0)
+  responsePercentage Float?
+  bounceRate         Float?
+
+  // aggregated location stats
+  cities     Json?
+  countries  Json?
+  continents Json?
+
+  // aggregated device stats
+  devices Json?
+
+  form Form @relation(fields: [formId], references: [id], onDelete: Cascade)
+
+  @@unique([formId, date])
+  @@map("form_daily_stats")
 }

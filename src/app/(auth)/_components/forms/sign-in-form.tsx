@@ -76,7 +76,7 @@ export default function SignInForm() {
   return (
     <div className="space-y-6">
       <AuthCardWrapper
-        title="beeform - signin"
+        title="zapform - signin"
         description="start from exactly where you left last time, just signin"
         footerText="Don't have an account ? SignUp"
         footerHref="/sign-up"

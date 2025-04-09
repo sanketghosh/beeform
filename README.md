@@ -1,11 +1,11 @@
-# beeform
+# zapform
 
 ---
 
 <div align="center">
   <br />
-    <a href="https://github.com/sanketghosh/beeform" target="_blank">
-      <img src="https://github.com/sanketghosh/beeform/blob/main/public/beeformRepoBanner.png" alt="Beeform Repo Banner">
+    <a href="https://github.com/sanketghosh/zapform" target="_blank">
+      <img src="https://github.com/sanketghosh/zapform/blob/main/public/zapformRepoBanner.png" alt="zapform Repo Banner">
     </a>
   <br />
 </div>
@@ -23,8 +23,8 @@
 
 <div align="center">
   <br />
-    <a href="https://github.com/sanketghosh/beeform" target="_blank">
-      <img src="https://github.com/sanketghosh/beeform/blob/main/public/beeform.png" alt="Beeform Repo Banner">
+    <a href="https://github.com/sanketghosh/zapform" target="_blank">
+      <img src="https://github.com/sanketghosh/zapform/blob/main/public/zapform.png" alt="zapform Repo Banner">
     </a>
   <br />
 </div>
@@ -58,8 +58,8 @@ A form builder application developed using Bun, Next.js, TypeScript, PostgreSQL,
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/sanketghosh/beeform.git
-    cd beeform
+    git clone https://github.com/sanketghosh/zapform.git
+    cd zapform
     ```
 
 2.  **Install dependencies using Bun:**
@@ -77,7 +77,7 @@ A form builder application developed using Bun, Next.js, TypeScript, PostgreSQL,
       ```
       BETTER_AUTH_SECRET=c40843d8e2ffef0a7d4bbad19025
       BETTER_AUTH_URL=http://localhost:3000
-      DATABASE_URL="postgresql://postgres:postgres@localhost:5432/beeform"
+      DATABASE_URL="postgresql://postgres:postgres@localhost:5432/zapform"
       NODE_ENV="development"
       ```
 

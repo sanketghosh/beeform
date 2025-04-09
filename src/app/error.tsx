@@ -1,14 +1,5 @@
 "use client"; // Error boundaries must be Client Components
 
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { ArrowRightIcon } from "lucide-react";
 import { useEffect } from "react";
 
 export default function Error({

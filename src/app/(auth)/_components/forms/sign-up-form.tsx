@@ -78,7 +78,7 @@ export default function SignUpForm() {
   return (
     <div className="space-y-6">
       <AuthCardWrapper
-        title="beeform - signup"
+        title="zapform - signup"
         description="just signup and build form in minutes."
         footerText="Already have an account ? SignIn"
         footerHref="/sign-in"

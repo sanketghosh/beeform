@@ -1,68 +1,80 @@
-import { buttonVariants } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+// packages
+import Link from "next/link";
+import { LibraryIcon } from "lucide-react";
+
+// local modules
 import { cn } from "@/lib/utils";
 import { getSessionData } from "@/utils/get-session";
-import { FlagIcon, ListChecksIcon } from "lucide-react";
-import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+import { StatsCardsType } from "@/types";
+import { statsCardsArr } from "@/app/(main)/_data";
+import { fetchFormsStats } from "@/app/(main)/_data-fetchers/get-forms-stats";
 
-export default async function DashboardPage() {
+// components
+import { Separator } from "@/components/ui/separator";
+import StatsCard from "@/app/(main)/_components/cards/stats-card";
+import { buttonVariants } from "@/components/ui/button";
+import FormCreateDialog from "@/app/(main)/_components/dialogs/form-create-dialog";
+import AllFormsStatsCharts from "./_components/all-forms-stats-charts";
+
+export default async function Dashboard() {
   const { name, authenticatedUserId } = await getSessionData();
-
-  const data = await prisma.programInformation.findMany({
-    where: {
-      userId: authenticatedUserId,
-    },
+  const { bounceRate, submissionRate, submissions, visits } =
+    await fetchFormsStats();
+  const { statsCards } = statsCardsArr({
+    visits,
+    submissions,
+    submissionRate,
+    bounceRate,
   });
 
   return (
-    <div className="w-full space-y-6">
-      <div className="max-w-2xl">
-        <h1 className="text-lg font-bold md:text-xl lg:text-2xl">
-          Welcome back, {name}.
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h1 className="text-xl font-bold md:text-2xl lg:text-3xl xl:text-4xl">
+          Hi! <span className="text-primary">{name}</span>. Whassup ?
         </h1>
-        <p className="font-medium text-muted-foreground">
-          Here you can access all your created programs and create new fitness
-          programs.
+        <p className="font-medium leading-tight text-muted-foreground md:text-lg xl:text-xl">
+          Welcome to your dashboard. You can create, manage, organize and check
+          form stats here.
         </p>
+      </div>
+
+      <Separator />
+
+      <div className="flex items-center space-x-3">
+        <FormCreateDialog />
         <Link
-          href={"/provide-information"}
           className={cn(
             buttonVariants({
               size: "default",
+              variant: "secondary",
             }),
-            "mt-3",
           )}
+          href={"/all-forms"}
         >
-          <FlagIcon />
-          Start Creating New Plan
+          <LibraryIcon size={22} />
+          View All Forms
         </Link>
       </div>
-      <Separator className="w-full" />
-      <div className="space-y-6">
-        {data.map((i) => (
-          <div
-            key={i.id}
-            className="w-full cursor-pointer space-y-1 rounded-xl border-2 px-3 py-4 transition-all hover:border-primary/30 hover:bg-secondary/30"
-          >
-            <h2 className="text-lg font-semibold">{i.name}</h2>
-            <div className="space-x-5 text-sm font-medium">
-              <span>
-                Age: <b>{i.age}years</b>
-              </span>
-              <span>
-                Height: <b>{i.height}cm</b>
-              </span>
-              <span>
-                Weight: <b>{i.weight}kg</b>
-              </span>
-            </div>
-            <p className="line-clamp-1 w-fit cursor-pointer text-sm font-medium text-muted-foreground underline underline-offset-4 transition-all hover:text-indigo-500">
-              http://localhost:3000/{i.id + i.uniqueUrlId}
-            </p>
-          </div>
+
+      <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        {statsCards.map((item: StatsCardsType, idx) => (
+          <StatsCard
+            key={idx}
+            description={item.desc}
+            title={item.title}
+            itemSerialNo={idx}
+            statsNumber={item.statsNumber}
+            /*  error={error}
+            isError={isError}
+            isLoading={isLoading} */
+            isPercentage={item.isPercentage}
+          />
         ))}
       </div>
+
+      <Separator />
+      <AllFormsStatsCharts userId={authenticatedUserId!} />
     </div>
   );
 }

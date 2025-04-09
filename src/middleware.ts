@@ -5,7 +5,7 @@ import { auth } from "@/lib/auth";
 type Session = typeof auth.$Infer.Session;
 
 const NON_PROTECTED_PAGES = ["/sign-in", "/sign-up", "/"];
-const PROTECTED_PAGES = ["/dashboard"];
+const PROTECTED_PAGES = ["/insights"];
 
 export default async function authMiddleware(request: NextRequest) {
   const { pathname, origin } = request.nextUrl;
@@ -39,5 +39,5 @@ export default async function authMiddleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard", "/sign-in", "/sign-up", "/"],
+  matcher: ["/insights", "/sign-in", "/sign-up", "/"],
 };

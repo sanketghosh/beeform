@@ -10,17 +10,22 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        instrumentSans: ["Instrument Sans", "serif"],
+        inter: ["Inter", "sans-serif"],
         boldonse: ["Boldonse", "system-ui"],
       },
+
       backgroundImage: {
         chequered:
           "linear-gradient(hsl(var(--secondary)) 1.1px, transparent 1.1px), linear-gradient(to right, hsl(var(--secondary)) 1.1px, hsl(var(--background)) 1.1px)",
+        "mesh-gradient":
+          "radial-gradient(at 40% 20%, hsla(28,100%,74%,1) 0px, transparent 50%), radial-gradient(at 80% 10%, hsla(216,100%,55%,1) 0px, transparent 50%), radial-gradient(at 0% 50%, hsla(355,100%,93%,1) 0px, transparent 50%), radial-gradient(at 80% 50%, hsla(340,100%,76%,1) 0px, transparent 50%), radial-gradient(at 0% 100%, hsla(22,100%,77%,1) 0px, transparent 50%), radial-gradient(at 80% 100%, hsla(242,100%,70%,1) 0px, transparent 50%), radial-gradient(at 0% 0%, hsla(343,100%,76%,1) 0px, transparent 50%)",
       },
       backgroundSize: {
         chequered: "22px 22px",
       },
       colors: {
+        "glass-stroke": "rgba(255, 255, 255, 0.15)", // For subtle borders on glass elements
+
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
