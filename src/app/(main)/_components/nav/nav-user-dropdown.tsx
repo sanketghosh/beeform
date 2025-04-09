@@ -13,7 +13,6 @@ import { useSidebar } from "@/components/ui/sidebar";
 
 // components
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenuContent,
   DropdownMenuGroup,

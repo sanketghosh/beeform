@@ -1,3 +1,7 @@
+// packages
+import { Loader2Icon } from "lucide-react";
+
+// components
 import {
   Card,
   CardContent,
@@ -5,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Loader2Icon } from "lucide-react";
 
 type StatsCardProps = {
   title: string;

@@ -1,3 +1,10 @@
+// packages
+import Link from "next/link";
+
+// local modules
+import { getAllForms } from "@/app/(main)/_data-fetchers/get-all-forms";
+
+// components
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -5,8 +12,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import Link from "next/link";
-import { getAllForms } from "../../_data-fetchers/get-all-forms";
 
 export default async function NavProjects() {
   const { forms } = await getAllForms("latest");

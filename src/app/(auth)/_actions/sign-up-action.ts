@@ -1,6 +1,6 @@
 "use server";
 
-// components
+// local modules
 import { auth } from "@/lib/auth";
 import {
   SignUpSchema,

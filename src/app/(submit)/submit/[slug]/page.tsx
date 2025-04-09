@@ -1,5 +1,8 @@
+// components
 import SubmitFormBody from "@/app/(submit)/_components/submit-form-body";
-import { getFormDataByShareUrl } from "../../_data-fetchers/get-form-data-by-share-url";
+
+// local modules
+import { getFormDataByShareUrl } from "@/app/(submit)/_data-fetchers/get-form-data-by-share-url";
 import { getSessionData } from "@/utils/get-session";
 
 type SubmitFormProps = {

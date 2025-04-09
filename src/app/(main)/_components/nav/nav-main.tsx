@@ -1,6 +1,7 @@
 "use client";
 
 // packages
+import Link from "next/link";
 import {
   AppWindowIcon,
   ArchiveIcon,
@@ -8,6 +9,7 @@ import {
   LucideProps,
   SettingsIcon,
 } from "lucide-react";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 // local modules
 import { cn } from "@/lib/utils";
@@ -20,9 +22,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import Link from "next/link";
-import NavLinkButton from "../sidebar/nav-link-button";
-import { ForwardRefExoticComponent, RefAttributes } from "react";
+import NavLinkButton from "@/app/(main)/_components/sidebar/nav-link-button";
 
 export type MenuLinkType = {
   href: string;

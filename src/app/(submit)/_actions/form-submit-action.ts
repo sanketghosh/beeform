@@ -1,11 +1,12 @@
 "use server";
 
+// local modules
 import { prisma } from "@/lib/prisma";
 import { getSessionData } from "@/utils/get-session";
 import {
   FormSubmitActionSchema,
   FormSubmitActionSchemaType,
-} from "../_schemas";
+} from "@/app/(submit)/_schemas";
 
 export const formSubmitAction = async (values: FormSubmitActionSchemaType) => {
   const validateFields = FormSubmitActionSchema.safeParse(values);

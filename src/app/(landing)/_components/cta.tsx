@@ -1,8 +1,6 @@
-import React from "react";
+// packages
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
 
 export const CTA: React.FC = () => {
   return (

@@ -1,4 +1,5 @@
 // packages
+import { ChevronsUpDownIcon } from "lucide-react";
 
 // local modules
 import { getSessionData } from "@/utils/get-session";
@@ -15,7 +16,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { ChevronsUpDownIcon } from "lucide-react";
 
 export default async function NavUser() {
   const { email, image, name } = await getSessionData();

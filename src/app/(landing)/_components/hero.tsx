@@ -1,9 +1,12 @@
+// packages
 import React from "react";
 import { motion } from "framer-motion";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { FlameIcon, GithubIcon, SparkleIcon } from "lucide-react";
 import Link from "next/link";
+
+//local modules
 import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 
 export const HeroSection: React.FC = () => {
   return (

@@ -1,6 +1,7 @@
 // packages
 import * as React from "react";
-import { CircleIcon, ZapIcon } from "lucide-react";
+import Link from "next/link";
+import { ZapIcon } from "lucide-react";
 
 // components
 import {
@@ -13,12 +14,9 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import NavMain from "../nav/nav-main";
-import Link from "next/link";
-import MainLink from "@/components/main-link";
-import Beehive from "@/assets/beehive";
-import NavProjects from "../nav/nav-projects";
-import NavUser from "../nav/nav-user";
+import NavMain from "@/app/(main)/_components/nav/nav-main";
+import NavProjects from "@/app/(main)/_components/nav/nav-projects";
+import NavUser from "@/app/(main)/_components/nav/nav-user";
 
 // This is sample data.
 

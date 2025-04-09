@@ -8,6 +8,12 @@ import Confetti from "react-confetti";
 
 // local modules
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
+import { $Enums, Form } from "@prisma/client";
+import { FormSubmitActionSchemaType } from "@/app/(submit)/_schemas";
+import { FormElementInstance } from "@/app/(main)/create-form/_types";
+import { formSubmitAction } from "@/app/(submit)/_actions/form-submit-action";
+import { getDeviceTypeFromUserAgent } from "@/app/(submit)/_utils/get-device-type";
 
 // components
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -18,16 +24,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { $Enums, Form } from "@prisma/client";
 import Link from "next/link";
-import { FormElementInstance } from "@/app/(main)/create-form/_types";
 import SingleElementBaseStyle from "@/app/(main)/create-form/_components/form-builder/single-element-base-style";
 import { FormElements } from "@/app/(main)/create-form/_components/form-builder/elements/form-builder-elements";
-import { useToast } from "@/hooks/use-toast";
-import OnlyAuthenticatedFormSubmissionAlert from "./alert-dialog/only-authenticated-form-submission-alert";
-import { getDeviceTypeFromUserAgent } from "../_utils/get-device-type";
-import { formSubmitAction } from "../_actions/form-submit-action";
-import { FormSubmitActionSchemaType } from "../_schemas";
+import OnlyAuthenticatedFormSubmissionAlert from "@/app/(submit)/_components/alert-dialog/only-authenticated-form-submission-alert";
 
 type SubmitFormBodyProps = {
   form: Form;

@@ -1,4 +1,5 @@
-import LoadComponents from "./_components/_load-components";
+// components
+import LoadComponents from "@/app/(landing)/_components/_load-components";
 
 export default function Landing() {
   return (

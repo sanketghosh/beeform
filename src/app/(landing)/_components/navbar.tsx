@@ -1,7 +1,10 @@
+// packages
 import React from "react";
 import { motion } from "framer-motion";
 import { ZapIcon } from "lucide-react";
 import Link from "next/link";
+
+// local modules
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 

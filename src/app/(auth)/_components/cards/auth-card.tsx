@@ -1,16 +1,11 @@
-import Link from "next/link";
 /** COMPONENTS */
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ArrowLeftIcon, MoveLeftIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
 
 type AuthCardProps = {
   title: string;

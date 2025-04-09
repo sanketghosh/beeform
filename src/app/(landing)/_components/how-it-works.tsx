@@ -1,12 +1,7 @@
+// packages
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  EarthIcon,
-  EyeIcon,
-  PaintbrushIcon,
-  PenSquareIcon,
-  Share2Icon,
-} from "lucide-react";
+import { EarthIcon, EyeIcon, PaintbrushIcon } from "lucide-react";
 
 const stepVariants = {
   offscreen: { opacity: 0, y: 50 },

@@ -1,8 +1,6 @@
-import React from "react";
+// packages
 import { motion } from "framer-motion";
 import { ChartAreaIcon, PaletteIcon, WindIcon } from "lucide-react";
-// You might want to use an icon library like react-icons
-// import { FaMousePointer, FaPalette, FaPlug } from 'react-icons/fa';
 
 const featureVariants = {
   hidden: { opacity: 0, y: 20 },
