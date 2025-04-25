@@ -33,6 +33,16 @@ type SingleFormDataProps = {
   }>;
 };
 
+export async function generateMetadata({ params }: SingleFormDataProps) {
+  const { slug } = await params;
+  const { form } = await getSingleForm(slug);
+
+  return {
+    title: form?.title,
+    description: form?.description,
+  };
+}
+
 export default async function SingleFormData({ params }: SingleFormDataProps) {
   const { slug } = await params;
   const { form, statsData } = await getSingleForm(slug);

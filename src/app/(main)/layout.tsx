@@ -10,7 +10,10 @@ import { AppSidebar } from "@/app/(main)/_components/sidebar/app-sidebar";
 import SidebarInsetWrapper from "@/app/(main)/_wrappers/sidebar-inset-wrapper";
 
 export const metadata: Metadata = {
-  title: "zapform",
+  title: {
+    template: "%s | zapform",
+    default: "zapform",
+  },
   description:
     "Create forms in minutes by just dragging and dropping components.",
 };

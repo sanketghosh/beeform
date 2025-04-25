@@ -7,6 +7,7 @@ import {
   PublishFormSchema,
   PublishFormSchemaType,
 } from "@/app/(main)/create-form/_schemas";
+import { revalidatePath } from "next/cache";
 
 export const publishFormAction = async (values: PublishFormSchemaType) => {
   const validateFields = PublishFormSchema.safeParse(values);
@@ -71,6 +72,7 @@ export const publishFormAction = async (values: PublishFormSchemaType) => {
       };
     }
 
+    revalidatePath(`/create-form/${formId}`);
     return {
       data: publishedForm,
       success: "Form has been published.",

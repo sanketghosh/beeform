@@ -7,6 +7,14 @@ import { getSessionData } from "@/utils/get-session";
 // components
 import LogoutButton from "@/app/(main)/_components/buttons/logout-button";
 
+export async function generateMetadata() {
+  const { email, name } = await getSessionData();
+  return {
+    title: name,
+    description: `Hi ${name} - ${email}`,
+  };
+}
+
 export default async function Account() {
   const { email, name, sessionCreatedAt, sessionExpiresAt, image } =
     await getSessionData();

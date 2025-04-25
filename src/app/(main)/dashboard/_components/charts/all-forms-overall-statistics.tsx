@@ -266,7 +266,7 @@ export default function Chart() {
 "use client";
 
 import * as React from "react";
-import { parse, format } from "date-fns";
+import { parse, format, isValid } from "date-fns";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import {
   Card,
@@ -313,15 +313,51 @@ const chartConfig: ChartConfig = {
 export default function AllFormsOverallStatistics({ chartData }: ChartProps) {
   const [timeRange, setTimeRange] = React.useState("90d");
 
-  const formattedChartData = chartData.map((item) => ({
+  /*  const formattedChartData = chartData.map((item) => ({
     ...item,
     date: format(parse(item.date, "dd/MM/yyyy", new Date()), "yyyy-MM-dd"),
     responsePercentage: parseFloat(item.responsePercentage.toFixed(1)),
     bounceRate: parseFloat(item.bounceRate.toFixed(1)),
-  }));
+  })); */
+
+  const formattedChartData = chartData
+    .map((item) => {
+      const parsedDate = parse(item.date, "dd/MM/yyyy", new Date());
+      if (!isValid(parsedDate)) {
+        console.error(`Invalid date string: ${item.date}`);
+        return null;
+      }
+      return {
+        ...item,
+        date: format(parsedDate, "yyyy-MM-dd"),
+        responsePercentage: parseFloat(item.responsePercentage.toFixed(1)),
+        bounceRate: parseFloat(item.bounceRate.toFixed(1)),
+      };
+    })
+    .filter(Boolean); // Filter out null values
+
+  /*  const filteredData = formattedChartData.filter((item) => {
+    const date = new Date(item.date);
+    const referenceDate = new Date();
+    let daysToSubtract = 90;
+    if (timeRange === "30d") {
+      daysToSubtract = 30;
+    } else if (timeRange === "7d") {
+      daysToSubtract = 7;
+    }
+    const startDate = new Date(referenceDate);
+    startDate.setDate(startDate.getDate() - daysToSubtract);
+    return date >= startDate;
+  }); */
 
   const filteredData = formattedChartData.filter((item) => {
+    if (!item) return false;
+
     const date = new Date(item.date);
+    if (isNaN(date.getTime())) {
+      console.error(`Invalid date value: ${item.date}`);
+      return false;
+    }
     const referenceDate = new Date();
     let daysToSubtract = 90;
     if (timeRange === "30d") {

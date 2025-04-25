@@ -14,7 +14,13 @@ import { Separator } from "@/components/ui/separator";
 import StatsCard from "@/app/(main)/_components/cards/stats-card";
 import { buttonVariants } from "@/components/ui/button";
 import FormCreateDialog from "@/app/(main)/_components/dialogs/form-create-dialog";
-import AllFormsStatsCharts from "./_components/all-forms-stats-charts";
+import AllFormsStatsCharts from "@/app/(main)/dashboard/_components/all-forms-stats-charts";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Welcome to the dashboard of the zapform.",
+};
 
 export default async function Dashboard() {
   const { name, authenticatedUserId } = await getSessionData();

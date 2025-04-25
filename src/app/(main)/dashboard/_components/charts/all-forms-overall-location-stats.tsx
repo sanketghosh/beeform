@@ -80,11 +80,20 @@ export default function AllFormsOverallLocationStats({
     startTime.setUTCHours(0, 0, 0, 0);
     startTime.setUTCDate(startTime.getUTCDate() - hoursToSubtract / 24);
 
-    console.log("🔍 Filtering from:", startTime.toISOString());
+    // console.log("🔍 Filtering from:", startTime.toISOString());
 
-    const filteredData = data.filter(
+    /*  const filteredData = data.filter(
       (entry) => new Date(entry.date) >= startTime,
-    );
+    ); */
+
+    const filteredData = data.filter((entry) => {
+      const entryDate = new Date(entry.date);
+      if (isNaN(entryDate.getTime())) {
+        console.error("Invalid date found", entry.date);
+        return false;
+      }
+      return entryDate >= startTime;
+    });
 
     // console.log("✅ Filtered Data:", filteredData);
 
