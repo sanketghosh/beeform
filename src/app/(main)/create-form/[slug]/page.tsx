@@ -2,9 +2,7 @@ import FormBuilder from "@/app/(main)/create-form/_components/form-builder/form-
 import { getSingleForm } from "@/app/(main)/_data-fetchers/get-single-form";
 
 type PageProps = {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 };
 
 export default async function CreateForm({ params }: PageProps) {
