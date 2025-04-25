@@ -290,6 +290,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { normalizeDateString } from "../../_utils/normalize-date-string";
 
 type ChartData = {
   date: string;
@@ -322,9 +323,15 @@ export default function AllFormsOverallStatistics({ chartData }: ChartProps) {
 
   const formattedChartData = chartData
     .map((item) => {
-      const parsedDate = parse(item.date, "dd/MM/yyyy", new Date());
+      const normalizedDate = normalizeDateString(item.date);
+      if (!normalizedDate) {
+        console.error(`Invalid format of normalized date: ${item.date}`);
+        return null;
+      }
+
+      const parsedDate = parse(normalizedDate, "dd/MM/yyyy", new Date());
       if (!isValid(parsedDate)) {
-        console.error(`Invalid date string: ${item.date}`);
+        console.error(`Invalid parsed date string: ${item.date}`);
         return null;
       }
       return {

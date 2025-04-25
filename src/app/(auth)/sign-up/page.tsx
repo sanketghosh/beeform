@@ -1,5 +1,6 @@
 // packages
 import Link from "next/link";
+import { ZapIcon } from "lucide-react";
 
 // local modules
 import { cn } from "@/lib/utils";
@@ -13,21 +14,22 @@ export default function SignUp() {
   return (
     <div className="h-screen">
       <div className="flex h-full flex-row-reverse">
-        <div className="relative hidden h-full flex-1 lg:block">
-          <img
-            src="/assets/alien_two.jpeg"
-            alt="alien"
-            className="z-0 h-full object-cover brightness-75"
-          />
-          <div className="absolute right-4 top-4 z-20 text-white">
+        <div className="relative hidden h-full flex-1 items-center justify-center bg-gradient-to-br from-indigo-700 via-violet-700 to-violet-600 lg:flex">
+          <div className="flex items-center gap-1">
+            <ZapIcon size={60} />
+            <p className="font-boldonse text-4xl">zapform</p>
+          </div>
+          {/* <div className="h-full bg-primary" /> */}
+          <div className="absolute left-4 top-4 z-20 text-white">
             <MainLink className="z-20" />
           </div>
           <div className="absolute bottom-4 left-4 right-4">
-            <h1 className="text-xl text-white">
-              Create forms that are as sweet as honey, without getting stuck in
-              a hive of complexity. With zapform, you'll be buzzing with
-              excitement as you drag, drop, and design your way to form
-              perfection.
+            <h1 className="text-base font-medium text-white">
+              Don't get stung by boring, clunky forms. With zapform, you'll
+              create forms that are as smooth as honey, as flexible as a bee in
+              flight, and as effective as a hive on a mission. So, what are you
+              waiting for? Join the buzz and start building forms that sting the
+              competition!
             </h1>
           </div>
         </div>

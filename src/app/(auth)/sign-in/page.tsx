@@ -8,22 +8,23 @@ import { cn } from "@/lib/utils";
 import SignInForm from "@/app/(auth)/_components/forms/sign-in-form";
 import { buttonVariants } from "@/components/ui/button";
 import MainLink from "@/components/main-link";
+import { ZapIcon } from "lucide-react";
 
 export default function SignIn() {
   return (
     <div className="h-screen">
       <div className="flex h-full">
-        <div className="relative hidden h-full flex-1 lg:block">
-          <img
-            src="/assets/alien_three.jpeg"
-            alt="alien"
-            className="z-0 h-full object-cover brightness-75"
-          />
+        <div className="relative hidden h-full flex-1 items-center justify-center bg-gradient-to-br from-indigo-700 via-violet-700 to-violet-600 lg:flex">
+          <div className="flex items-center gap-1">
+            <ZapIcon size={60} />
+            <p className="font-boldonse text-4xl">zapform</p>
+          </div>
+          {/* <div className="h-full bg-primary" /> */}
           <div className="absolute left-4 top-4 z-20 text-white">
             <MainLink className="z-20" />
           </div>
           <div className="absolute bottom-4 left-4 right-4">
-            <h1 className="text-xl text-white">
+            <h1 className="text-base font-medium text-white">
               Don't get stung by boring, clunky forms. With zapform, you'll
               create forms that are as smooth as honey, as flexible as a bee in
               flight, and as effective as a hive on a mission. So, what are you
