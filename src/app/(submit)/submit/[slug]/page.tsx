@@ -6,9 +6,9 @@ import { getFormDataByShareUrl } from "@/app/(submit)/_data-fetchers/get-form-da
 import { getSessionData } from "@/utils/get-session";
 
 type SubmitFormProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export default async function SubmitFormPage({ params }: SubmitFormProps) {

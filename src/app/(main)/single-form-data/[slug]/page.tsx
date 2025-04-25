@@ -28,9 +28,9 @@ import SharableLinkElement from "@/app/(main)/single-form-data/_components/share
 import FormSubmissionsTable from "@/app/(main)/single-form-data/_components/form-submissions-table";
 
 type SingleFormDataProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export default async function SingleFormData({ params }: SingleFormDataProps) {
