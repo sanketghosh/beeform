@@ -2,5 +2,5 @@ import { createAuthClient } from "better-auth/react"; // make sure to import fro
 
 export const authClient = createAuthClient({
   //you can pass client configuration here
-  baseURL: "https://zapform.vercel.app",
+  baseURL: "https://zapform-sand.vercel.app",
 });
