@@ -2,8 +2,7 @@
 
 // packages
 import * as React from "react";
-import { parse, format, isValid } from "date-fns";
-import { enGB } from "date-fns/locale";
+import { format } from "date-fns";
 
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
@@ -55,14 +54,19 @@ const chartConfig: ChartConfig = {
 export default function AllFormsOverallStatistics({ chartData }: ChartProps) {
   const [timeRange, setTimeRange] = React.useState("90d");
 
-  /*  const formattedChartData = chartData.map((item) => ({
-    ...item,
-    date: format(parse(item.date, "dd/MM/yyyy", new Date()), "yyyy-MM-dd"),
-    responsePercentage: parseFloat(item.responsePercentage.toFixed(1)),
-    bounceRate: parseFloat(item.bounceRate.toFixed(1)),
-  })); */
+  /*  
+   
+  // WITH DATE FNS
 
-  /*  const filteredData = formattedChartData.filter((item) => {
+  const formattedChartData = chartData.map((item) => ({
+  ...item,
+  date: format(parse(item.date, "dd/MM/yyyy", new Date(), { locale: enGB }), "yyyy-MM-dd"),
+  responsePercentage: parseFloat(item.responsePercentage.toFixed(1)),
+  bounceRate: parseFloat(item.bounceRate.toFixed(1)),
+}));
+  
+  
+  const filteredData = formattedChartData.filter((item) => {
     const date = new Date(item.date);
     const referenceDate = new Date();
     let daysToSubtract = 90;
@@ -76,34 +80,66 @@ export default function AllFormsOverallStatistics({ chartData }: ChartProps) {
     return date >= startDate;
   }); */
 
-  const formattedChartData = chartData.map((item) => ({
-    ...item,
-    date: format(
-      parse(item.date, "dd/MM/yyyy", new Date(), { locale: enGB }),
-      "yyyy-MM-dd",
-    ),
-    responsePercentage: parseFloat(item.responsePercentage.toFixed(1)),
-    bounceRate: parseFloat(item.bounceRate.toFixed(1)),
-  }));
+  const formattedChartData = chartData.map((item) => {
+    console.log("Manual - Raw date:", item.date);
+
+    // 1. Split the date string based on the delimiter '/'
+    const dateParts = item.date.split("/");
+
+    if (dateParts.length === 3) {
+      const day = parseInt(dateParts[0], 10);
+      const month = parseInt(dateParts[1], 10) - 1;
+      const year = parseInt(dateParts[2], 10);
+
+      const parsedDate = new Date(year, month, day);
+
+      console.log("Manual - Parsed date:", parsedDate);
+
+      const formattedYear = parsedDate.getFullYear();
+      const formattedMonth = String(parsedDate.getMonth() + 1).padStart(2, "0");
+      const formattedDay = String(parsedDate.getDate()).padStart(2, "0");
+      const formattedDateString = `${formattedYear}-${formattedMonth}-${formattedDay}`;
+
+      return {
+        ...item,
+        date: formattedDateString,
+        responsePercentage: parseFloat(item.responsePercentage.toFixed(1)),
+        bounceRate: parseFloat(item.bounceRate.toFixed(1)),
+      };
+    } else {
+      console.error(`Invalid date format: ${item.date}`);
+      return {
+        ...item,
+        date: null,
+        responsePercentage: parseFloat(item.responsePercentage.toFixed(1)),
+        bounceRate: parseFloat(item.bounceRate.toFixed(1)),
+      };
+    }
+  });
 
   const filteredData = formattedChartData.filter((item) => {
     if (!item) return false;
 
-    const date = new Date(item.date);
-    if (isNaN(date.getTime())) {
-      console.error(`Invalid date value: ${item.date}`);
+    if (typeof item.date === "string") {
+      const date = new Date(item.date);
+      if (isNaN(date.getTime())) {
+        console.error(`Invalid date value: ${item.date}`);
+        return false;
+      }
+      const referenceDate = new Date();
+      let daysToSubtract = 90;
+      if (timeRange === "30d") {
+        daysToSubtract = 30;
+      } else if (timeRange === "7d") {
+        daysToSubtract = 7;
+      }
+      const startDate = new Date(referenceDate);
+      startDate.setDate(startDate.getDate() - daysToSubtract);
+      return date >= startDate;
+    } else {
+      console.warn(`Skipping item with non-string or null date: ${item.date}`);
       return false;
     }
-    const referenceDate = new Date();
-    let daysToSubtract = 90;
-    if (timeRange === "30d") {
-      daysToSubtract = 30;
-    } else if (timeRange === "7d") {
-      daysToSubtract = 7;
-    }
-    const startDate = new Date(referenceDate);
-    startDate.setDate(startDate.getDate() - daysToSubtract);
-    return date >= startDate;
   });
 
   return (
