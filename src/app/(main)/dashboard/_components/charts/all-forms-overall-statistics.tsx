@@ -80,7 +80,7 @@ export default function AllFormsOverallStatistics({ chartData }: ChartProps) {
     return date >= startDate;
   }); */
 
-  const formattedChartData = chartData.map((item) => {
+  /*  const formattedChartData = chartData.map((item) => {
     console.log("Manual - Raw date:", item.date);
 
     // 1. Split the date string based on the delimiter '/'
@@ -94,6 +94,95 @@ export default function AllFormsOverallStatistics({ chartData }: ChartProps) {
       const parsedDate = new Date(year, month, day);
 
       console.log("Manual - Parsed date:", parsedDate);
+
+      const formattedYear = parsedDate.getFullYear();
+      const formattedMonth = String(parsedDate.getMonth() + 1).padStart(2, "0");
+      const formattedDay = String(parsedDate.getDate()).padStart(2, "0");
+      const formattedDateString = `${formattedYear}-${formattedMonth}-${formattedDay}`;
+
+      return {
+        ...item,
+        date: formattedDateString,
+        responsePercentage: parseFloat(item.responsePercentage.toFixed(1)),
+        bounceRate: parseFloat(item.bounceRate.toFixed(1)),
+      };
+    } else {
+      console.error(`Invalid date format: ${item.date}`);
+      return {
+        ...item,
+        date: null,
+        responsePercentage: parseFloat(item.responsePercentage.toFixed(1)),
+        bounceRate: parseFloat(item.bounceRate.toFixed(1)),
+      };
+    }
+  });
+
+  const filteredData = formattedChartData.filter((item) => {
+    if (!item) return false;
+
+    if (typeof item.date === "string") {
+      const date = new Date(item.date);
+      if (isNaN(date.getTime())) {
+        console.error(`Invalid date value: ${item.date}`);
+        return false;
+      }
+      const referenceDate = new Date();
+      let daysToSubtract = 90;
+      if (timeRange === "30d") {
+        daysToSubtract = 30;
+      } else if (timeRange === "7d") {
+        daysToSubtract = 7;
+      }
+      const startDate = new Date(referenceDate);
+      startDate.setDate(startDate.getDate() - daysToSubtract);
+      return date >= startDate;
+    } else {
+      console.warn(`Skipping item with non-string or null date: ${item.date}`);
+      return false;
+    }
+  }); */
+
+  const formattedChartData = chartData.map((item) => {
+    console.log("Manual - Raw date:", item.date);
+
+    // 1. Split the date string based on the delimiter '/'
+    const dateParts = item.date.split("/");
+
+    if (dateParts.length === 3) {
+      let day, month, year;
+
+      // Try MM/DD/YYYY format first (common in US/production environments)
+      if (parseInt(dateParts[0], 10) <= 12) {
+        // Assume MM/DD/YYYY
+        month = parseInt(dateParts[0], 10) - 1; // Month is 0-based in JS
+        day = parseInt(dateParts[1], 10);
+        year = parseInt(dateParts[2], 10);
+      } else {
+        // Assume DD/MM/YYYY (common in local/dev environments)
+        day = parseInt(dateParts[0], 10);
+        month = parseInt(dateParts[1], 10) - 1; // Month is 0-based in JS
+        year = parseInt(dateParts[2], 10);
+      }
+
+      // Ensure year is in a reasonable range (e.g., 2000-2099)
+      if (year < 100) {
+        year += 2000; // Handle two-digit years like '25' -> 2025
+      }
+
+      const parsedDate = new Date(year, month, day);
+
+      console.log("Manual - Parsed date:", parsedDate);
+
+      // Validate the parsed date
+      if (isNaN(parsedDate.getTime())) {
+        console.error(`Invalid parsed date for input: ${item.date}`);
+        return {
+          ...item,
+          date: null,
+          responsePercentage: parseFloat(item.responsePercentage.toFixed(1)),
+          bounceRate: parseFloat(item.bounceRate.toFixed(1)),
+        };
+      }
 
       const formattedYear = parsedDate.getFullYear();
       const formattedMonth = String(parsedDate.getMonth() + 1).padStart(2, "0");
